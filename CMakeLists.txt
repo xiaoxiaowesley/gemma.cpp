@@ -29,6 +29,13 @@ FetchContent_MakeAvailable(highway)
 FetchContent_Declare(sentencepiece GIT_REPOSITORY https://github.com/google/sentencepiece GIT_TAG 53de76561cfc149d3c01037f0595669ad32a5e7c)
 FetchContent_MakeAvailable(sentencepiece)
 
+if(${IS_IOS})
+  set(IS_DARWIN true)
+elseif(${IS_MACOS})
+  set(IS_DARWIN true)
+  list(APPEND BRIDGE_LINK_LIBS "-framework CoreFoundation")
+endif()
+
 set(SOURCES
   gemma.cc
   compression/blob_store.cc
