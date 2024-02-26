@@ -77,6 +77,16 @@ void ShowConfig(LoaderArgs& loader, InferenceArgs& inference, AppArgs& app) {
   }
 }
 
+/**
+ * @brief 执行Gemma REPL循环。(read-eval-print loop)
+ * 
+ * @param model Gemma模型对象。
+ * @param pool 线程池对象。
+ * @param inner_pool 内部线程池对象。
+ * @param args 推理参数对象。
+ * @param verbosity 详细程度。
+ * @param accept_token 接受令牌的函数。
+ */
 void ReplGemma(gcpp::Gemma& model, hwy::ThreadPool& pool,
                hwy::ThreadPool& inner_pool, const InferenceArgs& args,
                int verbosity, const gcpp::AcceptFunc& accept_token) {

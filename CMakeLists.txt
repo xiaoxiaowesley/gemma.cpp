@@ -68,17 +68,17 @@ endif()
 
 # Executable Target
 
-add_executable(gemma run.cc)
-target_sources(gemma PRIVATE ${SOURCES})
-set_property(TARGET gemma PROPERTY CXX_STANDARD 17)
-target_link_libraries(gemma hwy hwy_contrib sentencepiece)
-target_include_directories(gemma PRIVATE ./)
-FetchContent_GetProperties(sentencepiece)
-target_include_directories(gemma PRIVATE ${sentencepiece_SOURCE_DIR})
+# add_executable(gemma run.cc)
+# target_sources(gemma PRIVATE ${SOURCES})
+# set_property(TARGET gemma PROPERTY CXX_STANDARD 17)
+# target_link_libraries(gemma hwy hwy_contrib sentencepiece)
+# target_include_directories(gemma PRIVATE ./)
+# FetchContent_GetProperties(sentencepiece)
+# target_include_directories(gemma PRIVATE ${sentencepiece_SOURCE_DIR})
 
 ## Library Target
 
-add_library(libgemma ${SOURCES})
+add_library(libgemma SHARED ${SOURCES})
 set_property(TARGET libgemma PROPERTY CXX_STANDARD 17)
 set_target_properties(libgemma PROPERTIES PREFIX "")
 target_include_directories(libgemma PUBLIC ./)
