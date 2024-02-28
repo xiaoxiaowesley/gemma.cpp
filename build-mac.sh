@@ -15,3 +15,6 @@ cmake -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"  -B ./build
 
 cd build 
 make -j 4 libgemma
+
+# build xcfamework
+xcodebuild -create-xcframework  -library ./build/libgemma.dylib  -output ./build/gemma.xcframework 
