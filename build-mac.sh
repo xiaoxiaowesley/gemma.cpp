@@ -27,4 +27,4 @@ cmake --build ./build --target libgemma -- -j 12
 # cp ./gemma.h ./build/include/
 
 # # build xcfamework
-# xcodebuild -create-xcframework  -library ./build/libgemma.dylib -headers ./build/include  -output ./build/gemma.xcframework 
+xcodebuild -create-xcframework -framework ./build/libgemma.framework -output ./build/gemma.xcframework 
