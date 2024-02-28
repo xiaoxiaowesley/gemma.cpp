@@ -13,8 +13,18 @@ rm -rf build/*
 cmake -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"  -B ./build
 # cmake  -B ./build
 
-cd build 
-make -j 4 libgemma
+# cd build 
+# make -j 4 libgemma
 
-# build xcfamework
-xcodebuild -create-xcframework  -library ./build/libgemma.dylib  -output ./build/gemma.xcframework 
+# cd -
+
+
+cmake --build ./build --target libgemma -- -j 12
+
+# 拷贝头文件gemma.h到build/include目录下
+# mkdir -p ./build/include
+
+# cp ./gemma.h ./build/include/
+
+# # build xcfamework
+# xcodebuild -create-xcframework  -library ./build/libgemma.dylib -headers ./build/include  -output ./build/gemma.xcframework 
