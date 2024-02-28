@@ -78,9 +78,26 @@ endif()
 
 ## Library Target
 
+
+
 add_library(libgemma SHARED ${SOURCES})
 set_property(TARGET libgemma PROPERTY CXX_STANDARD 17)
 set_target_properties(libgemma PROPERTIES PREFIX "")
 target_include_directories(libgemma PUBLIC ./)
 target_link_libraries(libgemma hwy hwy_contrib sentencepiece)
 target_include_directories(libgemma PRIVATE ${sentencepiece_SOURCE_DIR})
+set_target_properties(libgemma PROPERTIES PUBLIC_HEADER "gemma.h")
+
+# 打印CMAKE_SYSTEM_NAME变量
+message(STATUS "CMAKE_SYSTEM_NAME: ${CMAKE_SYSTEM_NAME}")
+
+# for macOS
+set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "NO")
+set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "")
+set_target_properties(libgemma PROPERTIES
+  OUTPUT_NAME libgemma
+  FRAMEWORK TRUE
+  FRAMEWORK_VERSION C
+  MACOSX_FRAMEWORK_IDENTIFIER com.openkun.gemma
+#    PUBLIC_HEADER "${KUN_PUBLIC_HEADERS}"
+)
