@@ -5,26 +5,12 @@
 #    -DPLATFORM=SIMULATOR64 \
 #    -DDEPLOYMENT_TARGET=9.0 \
 #    -DIS_IOS=TRUE \
-#    -DENABLE_BITCODE=FALSE -G "Unix Makefiles" -B ./build/cmake-build-ios-x64 -S .
+#    -DENABLE_BITCODE=FALSE -G "Unix Makefiles" -B ./build/mac/cmake-build-ios-x64 -S .
 
-rm -rf build/*
+rm -rf build/mac/*
 
-# cmake -DCMAKE_OSX_ARCHITECTURES=arm64  -B ./build
-cmake -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"  -B ./build
-# cmake  -B ./build
+cmake -DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"  -B ./build/mac
 
-# cd build 
-# make -j 4 libgemma
+cmake --build ./build/mac --target libgemma -- -j 12
 
-# cd -
-
-
-cmake --build ./build --target libgemma -- -j 12
-
-# 拷贝头文件gemma.h到build/include目录下
-# mkdir -p ./build/include
-
-# cp ./gemma.h ./build/include/
-
-# # build xcfamework
-xcodebuild -create-xcframework -framework ./build/libgemma.framework -output ./build/gemma.xcframework 
+xcodebuild -create-xcframework -framework ./build/mac/libgemma.framework -output ./build/mac/gemma.xcframework 
